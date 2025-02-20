@@ -1,5 +1,6 @@
 import { metadata } from "@/app/login/layout";
 import connectDB from "@/libs/db/mongodb";
+import { Order } from "@/models/orderModel";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import { NextResponse } from "next/server";
 
@@ -35,20 +36,20 @@ export async function POST(req: Request) {
     return `#${timestamp}${random}`;
   }
 
-  const orderNumber = generateOrderNumber();
 
   try {
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout`,
-      customer_email: user.email,
+      customer_email: user?.email || "",
       metadata : {
         cart: JSON.stringify(cart),
-        customer_name: user.name,
-        order_number: orderNumber,
+        customer_name: user?.name || "Guest",
+        order_number: generateOrderNumber(),
       },
       locale: "en",
     });
