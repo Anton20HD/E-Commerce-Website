@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 const Success = () => {
   const { data: session } = useSession();
   const user = session?.user;
+  const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderDetails, setOrderDetails] = useState<any>({
     items: [],
     totalAmount: 0,
@@ -20,7 +21,9 @@ const Success = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("Session data:", session);
+    if (!session) return;
+
+
     const fetchSessionAndStoreOrder = async () => {
       const sessionId = new URLSearchParams(window.location.search).get(
         "session_id"
@@ -36,9 +39,8 @@ const Success = () => {
       const session = await response.json();
       const cart = JSON.parse(session.metadata.cart || "[]");
 
-
       const orderData = {
-        user: user?.id || null,
+        user: user ? user.id : null,
         orderNumber: session.metadata.order_number,
         products: cart,
         totalPrice: session.amount_total / 100,
@@ -46,7 +48,6 @@ const Success = () => {
       };
 
       console.log("Order data being sent:", orderData);
-
 
       // store guest order in ls if no user is logged in
       if (user?.id) {
@@ -66,12 +67,13 @@ const Success = () => {
         orderNumber: session.metadata.order_number || "N/A",
       });
 
+      setOrderPlaced(true);
       setLoading(false);
       localStorage.removeItem("cartItems");
     };
 
     fetchSessionAndStoreOrder();
-  }, [router, user]);
+  }, [router, user, session]);
 
   console.log("orderDetails", orderDetails);
 

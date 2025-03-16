@@ -66,6 +66,7 @@ const allAccessories = () => {
         price: product.price,
         size: selectedSize,
         image: product.image[0],
+        category: product.category
       });
     }
   };

@@ -44,6 +44,12 @@ const Checkout = () => {
       setNameError("Name is required");
       valid = false;
     }
+
+    if(typeof name !== "string") {
+      setNameError("Name must be characters")
+      valid = false;
+    }
+
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError("Valid email is required");
       valid = false;
@@ -52,16 +58,34 @@ const Checkout = () => {
       setCityError("City is required");
       valid = false;
     }
+
+    if(typeof city !== "string") {
+      setNameError("Name must be characters")
+      valid = false;
+    }
+
     if (!postalCode) {
       setPostalCodeError("Postal code is required");
       valid = false;
     }
+
+    if(isNaN(Number(postalCode))) {
+      setNameError("Postal code must be in numbers")
+      valid = false;
+    }
+
     if (!streetAddress) {
       setStreetAddressError("Street address is required");
       valid = false;
     }
+
     if (!country) {
       setCountryError("Country is required");
+      valid = false;
+    }
+
+    if(typeof country !== "string") {
+      setNameError("Country must be characters")
       valid = false;
     }
 

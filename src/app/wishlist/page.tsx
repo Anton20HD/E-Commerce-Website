@@ -34,14 +34,14 @@ const WishListPage = () => {
       ) {
         setOpen(null);
       }
-    }
+    };
 
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [open])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   return (
     <div className={styles.wishlistContainer}>
@@ -60,88 +60,101 @@ const WishListPage = () => {
             const isAccessory = item.category === "accessory";
 
             return (
-            <div
-              key={`${item._id}-${item.size || "onesize"}`}
-              className={styles.wishlistItem}
-            >
-              <div className={styles.wishlistWrapper}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className={styles.wishlistItemImage}
-                />
-                <div className={styles.itemDetails}>
-                  <div className={styles.productInfo}>
-                    <h3 className={styles.itemName}>{item.name}</h3>
-                    <p className={styles.itemPrice}>{item.price} kr</p>
-                  </div>
-                  <div className={styles.sizeAndAddProductSection}>
-                    <div 
-                    className={styles.sizeDetails} 
-                    ref={(el) => {
-                      if (el) dropdownRefs.current[item._id] = el;
-                    }}
-                    >
-                      <div
-                        className={styles.chooseSizeSection}
-                        onClick={() => {
-                          setOpen(open === item._id ? null : item._id);
-                        }}
-                      >
-                          <span className={styles.chooseSize}>
-                            {selectedSizes[item._id] ||
-                              (isAccessory ? "One Size" : "Choose size")}
-                          </span>
-                        {open === item._id ? (
-                          <ExpandMoreIcon />
-                        ) : (
-                          <ExpandLessIcon />
-                        )}
-                      </div>
+              <div
+                key={`${item._id}-${item.size || "onesize"}`}
+                className={styles.wishlistItem}
+              >
+                <div className={styles.wishlistWrapper}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className={styles.wishlistItemImage}
+                  />
+                  <div className={styles.itemDetails}>
+                    <div className={styles.productInfo}>
+                      <h3 className={styles.itemName}>{item.name}</h3>
+                      <p className={styles.itemPrice}>{item.price} kr</p>
+                    </div>
 
-                      {open === item._id && (
-                        <div className={styles.dropdownMenu}>
-                          <ul>
-                          {(isAccessory ? ["One Size"] : ["S", "M", "L"]).map((size) => (
-                              <DropdownItem
-                                key={size}
-                                size={size}
-                                onClick={() => handleSizeSelect(item._id, size)}
-                              />
-                            ))}
-                          </ul>
+                    <div className={styles.sizeAndAddProductSection}>
+                      {!isAccessory && (
+                        <div
+                          className={styles.sizeDetails}
+                          ref={(el) => {
+                            if (el) dropdownRefs.current[item._id] = el;
+                          }}
+                        >
+                          <div
+                            className={styles.chooseSizeSection}
+                            onClick={() => {
+                              setOpen(open === item._id ? null : item._id);
+                            }}
+                          >
+                            <span className={styles.chooseSize}>
+                              {selectedSizes[item._id] || "Choose size"}
+                            </span>
+                            {open === item._id ? (
+                              <ExpandMoreIcon />
+                            ) : (
+                              <ExpandLessIcon />
+                            )}
+                          </div>
+
+                          {open === item._id && (
+                            <div className={styles.dropdownMenu}>
+                              <ul>
+                                {["S", "M", "L"].map((size) => (
+                                  <DropdownItem
+                                    key={size}
+                                    size={size}
+                                    onClick={() =>
+                                      handleSizeSelect(item._id, size)
+                                    }
+                                  />
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
                       )}
+
+                      {isAccessory && (
+                        <div className={styles.sizeDetails}>
+                          <span className={styles.chooseSize}>One Size</span>
+                        </div>
+                      )}
+
+                      <button
+                        className={styles.addToCartButton}
+                        onClick={() =>
+                          addToCart({
+                            _id: item._id,
+                            name: item.name,
+                            image: item.image,
+                            price: item.price,
+                            size: isAccessory
+                              ? "One Size"
+                              : selectedSizes[item._id],
+                            quantity: 1,
+                          })
+                        }
+                        disabled={isAccessory ? false : !selectedSizes[item._id]}
+                      >
+                        Add to cart
+                      </button>
                     </div>
-                    <button
-                      className={styles.addToCartButton}
-                      onClick={() =>
-                        addToCart({
-                          _id: item._id,
-                          name: item.name,
-                          image: item.image,
-                          price: item.price,
-                          size: selectedSizes[item._id] || (isAccessory ? "One Size" : ""),
-                          quantity: 1,
-                        })
-                      }
-                      disabled={!selectedSizes[item._id] && !isAccessory}
-                    >
-                      Add to cart
-                    </button>
                   </div>
                 </div>
+                <div className={styles.navCloseIcon}>
+                  <CloseIcon
+                    onClick={() => removeFromWishlist(item._id)}
+                    className={styles.closeIcon}
+                  />
+                </div>
               </div>
-              <div className={styles.navCloseIcon}>
-                <CloseIcon
-                  onClick={() => removeFromWishlist(item._id)}
-                  className={styles.closeIcon}
-                ></CloseIcon>
-              </div>
-            </div>
-          )
-        })
-      )}
+            );
+          })
+        )}
       </div>
     </div>
   );

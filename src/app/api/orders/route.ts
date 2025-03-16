@@ -15,19 +15,34 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log("Order Request Body:", body);
 
-
-    const { user, orderNumber, products, totalPrice, paid } = body;
+    const { orderNumber, user, products, totalPrice, paid } = body;
 
     if (!user) {
-        console.error("User is undefined in the request.");
-        return NextResponse.json({ error: "User ID is missing"}, {status: 400 });
-      }
-
-    if (!orderNumber || !products || !totalPrice) {
-        return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      console.error("User is undefined in the request.");
+      return NextResponse.json(
+        { error: "User ID is missing" },
+        { status: 400 }
+      );
     }
 
-    const order = await Order.create({
+    if (!orderNumber || !products || !totalPrice) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    const existingOrder = await Order.findOne({ orderNumber });
+
+    if (existingOrder) {
+      console.log("Order already exists");
+      return NextResponse.json(
+        { error: "Order already exists" },
+        { status: 200 }
+      );
+    }
+
+    const newOrder = new Order({
       user,
       orderNumber,
       products,
@@ -35,8 +50,10 @@ export async function POST(req: Request) {
       paid,
     });
 
-    console.log("order saved successfully:", order);
-    return NextResponse.json(order, { status: 201 });
+    await newOrder.save();
+
+    console.log("order saved successfully:", newOrder);
+    return NextResponse.json(newOrder, { status: 201 });
   } catch (error) {
     console.error("Order saving error:", error);
     return NextResponse.json(
