@@ -22,23 +22,12 @@
 
 
 
-.orderInfoSection {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-}
+.dashboardTitle {
 
-.wishlistSection {
-    border-bottom: 1px solid black;
+    font-family: $primaryfont;
+    font-weight: 300;
+    font-size: 35px;
 }
-
-.signOutSection {
-    border-bottom: 1px solid black;
-}
-
-.profileOverviewSection {
-    //border: 1px solid black;
-}
-
 
 .dashboardTitleContent {}
 
@@ -48,7 +37,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 20px;
-    
+
     width: 100%;
     padding: 20px;
 }
@@ -65,7 +54,7 @@
     text-align: center;
     cursor: pointer;
     margin-top: 10px;
-    gap:30px;
+    gap: 30px;
 }
 
 .orderProductsSection {
@@ -77,77 +66,98 @@
 .orderInfo {
     display: flex;
     flex-direction: column;
-    gap: 8px;  
+    gap: 8px;
     align-items: flex-start;
-  }
+}
 
-  .myOrdersTitle {
+.myOrdersTitle {
 
     font-family: $primaryfont;
     font-weight: 300;
     font-size: 30px;
-  }
+}
 
-  .orderNumber {
+.orderNumber {
     font-family: $primaryfont;
     font-weight: 300;
     font-size: 22px;
-  }
-  
-  .orderInfo p {
+}
+
+.orderInfo p {
     margin: 0;
-    font-size: 14px;  
-    color: #333;  
+    font-size: 14px;
+    color: #333;
     font-family: $secondfont;
-  }
+}
 
 
 
 .orderStatusAndPriceSection {
 
     display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
+    flex-direction: column;
+    align-items: flex-start;
 }
+
 .productItem {
     list-style-type: none;
     display: flex;
-    justify-content: center;  
-    align-items: center;     
-    padding: 8px; 
-    
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+
 }
 
 .productImage {
     display: block;
     background-color: #f8f8f8;
-    margin: 0 auto; 
+    margin: 0 auto;
     width: 100px;
     height: 100px;
     object-fit: cover;
-    
-    
+
+
 }
 
-.profileOverviewSection,
-.accountContent {
-    height: 100%; // Ensure they take up equal height
-    // border: 1px solid black; // Debugging or for design purposes
+.profileOverviewSection {
 
-    //box-sizing: border-box; // To include padding in size calculations
+
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-bottom: auto;
+
 }
 
 .itemWrapper {
 
+
     display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: flex-start;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    height: 100px;
     align-items: center;
+    align-content: center;
     gap: 10px;
+    margin-top: 10px;
+    //box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+// //.profileOverviewSection,
+// .accountContent {
+//     height: 100%; // Ensure they take up equal height
+//     // border: 1px solid black; // Debugging or for design purposes
 
+//     //box-sizing: border-box; // To include padding in size calculations
+// }
+
+
+.itemName {
+    font-family: $primaryfont;
+    font-weight: 300;
+    font-size: 25px;
+}
 
 .itemName:hover {
     text-decoration: underline;

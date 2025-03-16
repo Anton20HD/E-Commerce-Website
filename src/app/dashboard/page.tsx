@@ -41,6 +41,10 @@ const DashboardPage = () => {
     signOut({ callbackUrl: "/" });
   };
 
+  const handleWishlist = () => {
+    router.push("/wishlist");
+  };
+
   const fetchOrders = async () => {
     if (!session) return;
 
@@ -81,41 +85,40 @@ const DashboardPage = () => {
       </div>
       <div className={styles.dashboardSection}>
         <div className={styles.profileOverviewSection}>
-          <div className={styles.orderInfoSection}>
-            <div
-              className={`${styles["itemWrapper"]} ${
-                activeLink === "orders" ? styles["active"] : ""
-              }`}
-              onClick={() => setActiveLink("orders")}
-            >
-              <ReceiptIcon />
-              <span className={styles.itemName}>Orders</span>
-            </div>
+          <div
+            className={`${styles["itemWrapper"]} ${
+              activeLink === "orders" ? styles["active"] : ""
+            }`}
+            onClick={() => setActiveLink("orders")}
+          >
+            <ReceiptIcon />
+            <span className={styles.itemName}>Orders</span>
           </div>
-          <div className={styles.wishlistSection}>
-            <div
-              className={`${styles["itemWrapper"]} ${
-                activeLink === "wishlist" ? styles["active"] : ""
-              }`}
-              onClick={() => setActiveLink("wishlist")}
-            >
-              <HeartIcon />
-              <span className={styles.itemName}>Wishlist</span>
-            </div>
+
+          <div
+            className={`${styles["itemWrapper"]} ${
+              activeLink === "wishlist" ? styles["active"] : ""
+            }`}
+            onClick={() => {
+              setActiveLink("wishlist");
+              handleWishlist();
+            }}
+          >
+            <HeartIcon />
+            <span className={styles.itemName}>Wishlist</span>
           </div>
-          <div className={styles.signOutSection}>
-            <div
-              className={`${styles["itemWrapper"]} ${
-                activeLink === "signout" ? styles["active"] : ""
-              }`}
-              onClick={() => {
-                setActiveLink("signout");
-                handleSignOut();
-              }}
-            >
-              <ExitToAppIcon />
-              <span className={styles.itemName}>Signout</span>
-            </div>
+
+          <div
+            className={`${styles["itemWrapper"]} ${
+              activeLink === "signout" ? styles["active"] : ""
+            }`}
+            onClick={() => {
+              setActiveLink("signout");
+              handleSignOut();
+            }}
+          >
+            <ExitToAppIcon />
+            <span className={styles.itemName}>Signout</span>
           </div>
         </div>
         <div className={styles.accountContent}>
@@ -135,11 +138,21 @@ const DashboardPage = () => {
                   {orders.map((order: any) => (
                     <div key={order._id} className={styles.orderCard}>
                       <div className={styles.orderStatusAndPriceSection}>
-                        <h3 className={styles.orderNumber}>Order: {order.orderNumber}</h3>
+                        <h3 className={styles.orderNumber}>
+                          Order: {order.orderNumber}
+                        </h3>
                         <div className={styles.orderInfo}>
-                        <p><b>Status: </b>{order.paid ? "Paid" : "Unpaid"}</p>
-                        <p><b>Total Price: </b> ${order.totalPrice}</p>
-                        <p><b>Ordered on: </b>{new Date(order.createdAt).toLocaleDateString()}</p> 
+                          <p>
+                            <b>Status: </b>
+                            {order.paid ? "Paid" : "Unpaid"}
+                          </p>
+                          <p>
+                            <b>Total Price: </b> {order.totalPrice} kr
+                          </p>
+                          <p>
+                            <b>Ordered on: </b>
+                            {new Date(order.createdAt).toLocaleDateString()}
+                          </p>
                         </div>
                       </div>
                       <ul className={styles.orderProductsSection}>
@@ -164,8 +177,8 @@ const DashboardPage = () => {
             </div>
           )}
 
-          {activeLink === "wishlist" && <div>Wishlist Content</div>}
-          {activeLink === "signout" && <div>Sign Out Content</div>}
+          {activeLink === "wishlist" && <div></div>}
+          {activeLink === "signout" && <div></div>}
         </div>
       </div>
     </div>
