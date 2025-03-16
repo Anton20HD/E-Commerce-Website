@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import productModel from "@/models/productModel";
+import { User } from "@/models/userModel";
 import connectDB from "@/libs/db/mongodb";
 import { uploadToCloudinary, CloudinaryResult } from "@/libs/cloud/cloudinary";
 
@@ -72,34 +73,6 @@ export async function GET(req: Request) {
   } catch (error) {
     return NextResponse.json(
       { message: "Error fetching products" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function DELETE(req: Request) {
-  await connectDB();
-
-  try {
-    const { id } = await req.json();
-
-    const deletedProduct = await productModel.findByIdAndDelete(id);
-
-    if (!deletedProduct) {
-      return NextResponse.json(
-        { message: "Product not found" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json(
-      { message: "Product deleted successfully" },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error deleting product:", error);
-    return NextResponse.json(
-      { message: "Error deleting product", error },
       { status: 500 }
     );
   }

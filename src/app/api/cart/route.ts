@@ -3,6 +3,7 @@ import { User } from "@/models/userModel"
 import { CartItem } from "@/app/components/cartContext/page";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import connectDB from "@/libs/db/mongodb";
 
 export async function POST(req: Request) {
     try {
@@ -101,4 +102,26 @@ export async function GET(req:Request) {
             { status: 500}
         )
     }
+}
+
+export async function DELETE(req: Request) {
+  await connectDB();
+
+  try {
+    const { userId } = await req.json();
+
+    // Clear the cart by setting the cart array to an empty array
+    await User.findByIdAndUpdate(userId, { $set: { cartData: [] } });
+
+    return NextResponse.json(
+      { message: "Cart cleared successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error clearing cart:", error);
+    return NextResponse.json(
+      { message: "Error clearing cart", error },
+      { status: 500 }
+    );
+  }
 }

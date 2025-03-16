@@ -19,6 +19,23 @@ const Success = () => {
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  
+  const clearCartFromServer = async () => {
+    if (user?.id) {
+      try {
+        await fetch("/api/cart", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: user.id }),
+        });
+        console.log("Cart cleared from the server.");
+      } catch (error) {
+        console.error("Error clearing cart from server:", error);
+      }
+    }
+  };
 
   useEffect(() => {
     if (!session && !localStorage.getItem("guestOrder")) return router.push("/checkout");
@@ -56,6 +73,7 @@ const Success = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderData),
         });
+        await clearCartFromServer();
       } else {
         localStorage.setItem("guestOrder", JSON.stringify(orderData));
       }
