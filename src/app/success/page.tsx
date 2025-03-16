@@ -21,7 +21,7 @@ const Success = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) return;
+    if (!session && !localStorage.getItem("guestOrder")) return router.push("/checkout");
 
 
     const fetchSessionAndStoreOrder = async () => {
