@@ -61,10 +61,5 @@ export async function POST(req: Request) {
 
     }
 
-    export const config = {
-
-        api: {
-            bodyParser: false,
-        }
-    }
-
+export const runtime = 'edge';  
+export const bodyParser = false
