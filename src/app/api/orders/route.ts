@@ -63,27 +63,35 @@ export async function POST(req: Request) {
   }
 }
 
-// export async function GET(req: Request) {
-//     const session = (await getServerSession(authOptions)) as Session;
+export async function GET(req: Request) {
+    const session = await getServerSession(authOptions);
 
-//     if (!session || !session.user?.id) {
-//         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-//       }
+    if (!session || !session.user?.id) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      }
 
-//       const userId = session.user.id;
+      const userId = session.user.id;
 
-//     try {
-//         const user = await User.findById(userId);
+    try {
 
-//         if (!user || user.orders.length === 0) {
-//             return NextResponse.json({ message: 'No orders found.' }, { status: 404 });
-//           }
+        await connectDB();
 
-//           return NextResponse.json({ orders: user.orders });
-//     } catch(error) {
+        const orders  = await Order.find({user: userId});
 
-//         console.error(error);
-//         return NextResponse.json({ message: 'Error fetching orders'}, { status: 500 })
-//     }
+        if (!orders || orders.length === 0) {
+            return NextResponse.json({ message: 'No orders found.' }, { status: 404 });
+          }
 
-// }
+          const ordersWithTimestamp = orders.map(order => ({
+            ...order.toObject(),
+            createdAt: order.createdAt.toISOString(), // Convert to a readable format
+        }));
+
+          return NextResponse.json({ orders: ordersWithTimestamp });
+    } catch(error) {
+
+        console.error(error);
+        return NextResponse.json({ message: 'Error fetching orders'}, { status: 500 })
+    }
+
+}

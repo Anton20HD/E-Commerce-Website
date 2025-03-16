@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+
+
 .dashboardContainer {
 
     width: 100%;
@@ -8,7 +11,7 @@
 
 .dashboardSection {
     display: grid;
-    grid-template-columns: 1fr 3fr; 
+    grid-template-columns: 1fr 3fr;
     gap: 5px;
     justify-content: center;
     align-items: center;
@@ -20,17 +23,17 @@
 
 
 .orderInfoSection {
-   border-bottom: 1px solid black;
-   border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 }
 
 .wishlistSection {
     border-bottom: 1px solid black;
- }
+}
 
- .signOutSection {
+.signOutSection {
     border-bottom: 1px solid black;
- }
+}
 
 .profileOverviewSection {
     //border: 1px solid black;
@@ -41,12 +44,95 @@
 
 .accountContent {
     //border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    
+    width: 100%;
+    padding: 20px;
+}
+
+.orderCard {
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    gap:30px;
+}
+
+.orderProductsSection {
+
+    display: flex;
+    gap: 10px;
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;  
+    align-items: flex-start;
+  }
+
+  .myOrdersTitle {
+
+    font-family: $primaryfont;
+    font-weight: 300;
+    font-size: 30px;
+  }
+
+  .orderNumber {
+    font-family: $primaryfont;
+    font-weight: 300;
+    font-size: 22px;
+  }
+  
+  .orderInfo p {
+    margin: 0;
+    font-size: 14px;  
+    color: #333;  
+    font-family: $secondfont;
+  }
+
+
+
+.orderStatusAndPriceSection {
+
+    display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+}
+.productItem {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    padding: 8px; 
+    
+}
+
+.productImage {
+    display: block;
+    background-color: #f8f8f8;
+    margin: 0 auto; 
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    
+    
 }
 
 .profileOverviewSection,
 .accountContent {
     height: 100%; // Ensure they take up equal height
-   // border: 1px solid black; // Debugging or for design purposes
+    // border: 1px solid black; // Debugging or for design purposes
 
     //box-sizing: border-box; // To include padding in size calculations
 }

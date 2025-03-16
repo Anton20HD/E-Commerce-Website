@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import styles from "@/app/dashboard/page.module.scss";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -10,8 +10,13 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 
 const DashboardPage = () => {
   const router = useRouter();
-  const { data: session, status} = useSession();
-  const [activeLink, setActiveLink] = useState<"orders" | "wishlist" | "signout">("orders");
+  const { data: session, status } = useSession();
+  const [activeLink, setActiveLink] = useState<
+    "orders" | "wishlist" | "signout"
+  >("orders");
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   // const renderContent = () => {
   //   switch (activeLink) {
@@ -33,11 +38,38 @@ const DashboardPage = () => {
   }, [session, status, router]);
 
   const handleSignOut = () => {
+    signOut({ callbackUrl: "/" });
+  };
 
-    signOut({ callbackUrl: "/"})
-  }
+  const fetchOrders = async () => {
+    if (!session) return;
 
-  
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/orders");
+
+      if (response.ok) {
+        const data = await response.json();
+        setOrders(data.orders);
+      } else {
+        setError("There was an error fetching your orders.");
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setError("There was an error fetching your orders");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeLink === "orders") {
+      fetchOrders();
+    }
+  }, [activeLink]);
+
   if (!session) {
     return null; // Avoid rendering anything until redirect is handled
   }
@@ -77,11 +109,9 @@ const DashboardPage = () => {
                 activeLink === "signout" ? styles["active"] : ""
               }`}
               onClick={() => {
-                setActiveLink("signout")
+                setActiveLink("signout");
                 handleSignOut();
-              
               }}
-
             >
               <ExitToAppIcon />
               <span className={styles.itemName}>Signout</span>
@@ -89,28 +119,57 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className={styles.accountContent}>
-        {activeLink === 'orders' && 
-        <div>
-          <h2>My orders</h2>
+          {activeLink === "orders" && (
+            <div>
+              <h2 className={styles.myOrdersTitle}>My orders</h2>
 
-          
-          </div>}
-        {activeLink === 'wishlist' && 
-        <div>
-          
-          Wishlist Content
-          
-          </div>}
-        {activeLink === 'signout' && 
-        <div>
+              {loading && <p>Loading orders</p>}
+              {error && <p>{error}</p>}
 
-          Sign Out Content
-          </div>}
+              {!loading && !error && orders.length === 0 && (
+                <p>You have no orders yet.</p>
+              )}
+
+              {orders.length > 0 && (
+                <div>
+                  {orders.map((order: any) => (
+                    <div key={order._id} className={styles.orderCard}>
+                      <div className={styles.orderStatusAndPriceSection}>
+                        <h3 className={styles.orderNumber}>Order: {order.orderNumber}</h3>
+                        <div className={styles.orderInfo}>
+                        <p><b>Status: </b>{order.paid ? "Paid" : "Unpaid"}</p>
+                        <p><b>Total Price: </b> ${order.totalPrice}</p>
+                        <p><b>Ordered on: </b>{new Date(order.createdAt).toLocaleDateString()}</p> 
+                        </div>
+                      </div>
+                      <ul className={styles.orderProductsSection}>
+                        {order.products.map((product: any) => (
+                          <li key={product._id} className={styles.productItem}>
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className={styles.productImage}
+                            />
+                            {/* <span>
+                              {product.name} - {product.size} x{" "}
+                              {product.quantity} - ${product.price}
+                            </span> */}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeLink === "wishlist" && <div>Wishlist Content</div>}
+          {activeLink === "signout" && <div>Sign Out Content</div>}
         </div>
       </div>
     </div>
   );
 };
-
 
 export default DashboardPage;
