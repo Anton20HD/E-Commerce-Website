@@ -174,7 +174,7 @@ const DashboardPage = () => {
                         </div>
                       </div>
                       <ul className={styles.orderProductsSection}>
-                        {order.products.map((product: any) => (
+                        {order.products.map((product: Product) => (
                           <li key={product._id} className={styles.productItem}>
                             <img
                               src={product.image}

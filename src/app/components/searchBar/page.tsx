@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./page.module.scss";
-import { useRouter } from "next/navigation";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { useSearch } from "../searchContext/page";
 import ProductSearchDropdown from "../searchDropdown/page";
 
 const SearchBar = () => {
-  const [search, setSearch] = useState<string>("");
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
