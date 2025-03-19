@@ -4,6 +4,8 @@ import { User } from "@/models/userModel";
 import connectDB from "@/libs/db/mongodb";
 import bcrypt from "bcrypt";
 import { User as NextAuthUser } from "next-auth";
+import { JWT } from "next-auth/jwt";
+import { Session } from "next-auth";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -14,7 +16,10 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+
+      // Ensures credentials is an object with string keys or undefined
+      async authorize(credentials: Record<string, string> | undefined) {
+
         // Connect to db to verify the user credentials
         await connectDB();
 
@@ -51,7 +56,7 @@ export const authOptions: AuthOptions = {
 
   // Allow customization of the session and JWt behavior
   callbacks: {
-    async jwt({ token, user }: { token: any, user?: NextAuthUser | null }) {
+    async jwt({ token, user }: { token: JWT; user?: NextAuthUser | null }) {
       // If user is logged in and user data is availablem add the user id to the token
       if (user) {
         token.id = user.id; // Ensures user has an "id" property
@@ -60,7 +65,7 @@ export const authOptions: AuthOptions = {
       return token;
     },
 
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       // If session and session.user exist, add the user id to the session object
       if (session?.user) {
         session.user.id = token.id as string; // Ensures id is treated as a string

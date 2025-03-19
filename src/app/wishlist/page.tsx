@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "@/app/wishlist/page.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import RemoveIcon from "@mui/icons-material/Remove";
 import { useWishlist } from "@/app/components/wishlistContext/page";
 import { useCart } from "../components/cartContext/page";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";

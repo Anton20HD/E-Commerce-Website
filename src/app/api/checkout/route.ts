@@ -1,8 +1,16 @@
-import { metadata } from "@/app/login/layout";
-import connectDB from "@/libs/db/mongodb";
-import { Order } from "@/models/orderModel";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 import { NextResponse } from "next/server";
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+
+interface CartItem {
+  name: string;
+  size: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
+
 
 export async function POST(req: Request) {
   // await connectDB();
@@ -16,7 +24,7 @@ export async function POST(req: Request) {
 
   const { cart, user } = await req.json();
 
-  const line_items = cart.map((item: any) => ({
+  const line_items = cart.map((item: CartItem) => ({
     price_data: {
       currency: "sek",
       product_data: {

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+
 import productModel from "@/models/productModel";
 import connectDB from "@/libs/db/mongodb";
 import { NextResponse } from "next/server";

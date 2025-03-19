@@ -1,30 +1,24 @@
-import { NextResponse } from 'next/server';
-import {User} from "@/models/userModel"
-import connectDB from '@/libs/db/mongodb';
-import bcrypt from 'bcrypt';
-
-
+import { NextResponse } from "next/server";
+import { User } from "@/models/userModel";
+import connectDB from "@/libs/db/mongodb";
 
 export async function POST(req: Request) {
-  
-
   try {
     await connectDB();
     const { name, email, password } = await req.json();
-    
 
-    if (!name || !email || !password ) {
+    if (!name || !email || !password) {
       return NextResponse.json(
         { message: "Name, email, and password are required" },
         { status: 400 }
       );
     }
 
-    if (!/^[A-Za-z\s]+$/.test(name)) { 
-        return NextResponse.json(
-        {message: "Name can only contain letters and spaces"},
-        {status: 400}
-        )
+    if (!/^[A-Za-z\s]+$/.test(name)) {
+      return NextResponse.json(
+        { message: "Name can only contain letters and spaces" },
+        { status: 400 }
+      );
     }
 
     if (!/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
@@ -34,12 +28,18 @@ export async function POST(req: Request) {
       );
     }
 
-    if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
-      return NextResponse.json(
-        { message: "Password must include uppercase, lowercase, number, and special character, and be at least 8 characters long"},
-        { status: 400 }
-
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+        password
       )
+    ) {
+      return NextResponse.json(
+        {
+          message:
+            "Password must include uppercase, lowercase, number, and special character, and be at least 8 characters long",
+        },
+        { status: 400 }
+      );
     }
 
     const existingUser = await User.findOne({ email });
@@ -50,28 +50,25 @@ export async function POST(req: Request) {
       );
     }
 
-      //Hash password before saving to db
-
+    //Hash password before saving to db
 
     const user = await User.create({
       name,
       email,
-      password, 
+      password,
     });
 
-
-
-
     return NextResponse.json(
-      { message: 'User registered successfully',
-      user: { id: user._id, name: user.name, email: user.email },
-    },
-    { status: 201 }
+      {
+        message: "User registered successfully",
+        user: { id: user._id, name: user.name, email: user.email },
+      },
+      { status: 201 }
     );
-  } catch(error) {
-    console.error("Registration error:", error)
+  } catch (error) {
+    console.error("Registration error:", error);
     return NextResponse.json(
-      { message: 'Internal Server Error'},
+      { message: "Internal Server Error" },
       { status: 500 }
     );
   }

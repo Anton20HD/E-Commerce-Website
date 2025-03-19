@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import mongoose from "mongoose";
-import { User } from "@/models/userModel";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import connectDB from "@/libs/db/mongodb";
@@ -63,7 +61,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user?.id) {

@@ -3,13 +3,14 @@ import styles from "@/app/categoryPage/page.module.scss";
 import clothesImg from "@/app/assets/clothes.jpg";
 import accessoriesImg from "@/app/assets/accessories.jpeg";
 import Link from "next/link";
+//import Image from "next/image";
 
 const CategoryPage = () => {
   return (
     <div className={styles.categoryContainer}>
       <div className={styles.categorySection}>
         <div className={styles.imageWrapper}>
-          <img className={styles.clothesImg} src={clothesImg.src} alt="" />
+          <img className={styles.clothesImg} src={clothesImg.src} alt=""  /> 
           <Link href="/apparel">
             <button className={styles.categoryButton}>Apparel</button>
           </Link>
@@ -21,7 +22,7 @@ const CategoryPage = () => {
             src={accessoriesImg.src}
             alt=""
           />
-          <Link href="/allAccessoriesPage">
+          <Link href="/accessories">
             <button className={styles.categoryButton}>Accessories</button>
           </Link>
         </div>

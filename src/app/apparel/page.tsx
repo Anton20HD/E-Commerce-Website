@@ -3,12 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/app/apparel/page.module.scss";
-import CartIcon from "@mui/icons-material/LocalMallOutlined";
-import HeartIcon from "@mui/icons-material/FavoriteBorderOutlined";
 //import { useSearch } from "../components/searchContext/page";
 import { useWishlist } from "../components/wishlistContext/page";
 import HeartOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import HeartFilledIcon from "@mui/icons-material/Favorite";
+//import Image from "next/image";
 
 interface Product {
   _id: string;
@@ -27,7 +26,7 @@ const AllApparel = () => {
   // const { searchTerm } = useSearch();
   const router = useRouter();
   const { addToWishlist, wishlist, removeFromWishlist } = useWishlist();
-  const [selectedSize, setSelectedSize] = useState("S");
+  const [selectedSize] = useState("S");
 
   useEffect(() => {
     const fetchProducts = async () => {

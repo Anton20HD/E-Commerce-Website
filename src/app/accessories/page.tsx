@@ -3,13 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/app/accessories/page.module.scss";
-import CartIcon from "@mui/icons-material/LocalMallOutlined";
-import HeartIcon from "@mui/icons-material/FavoriteBorderOutlined";
 //import { useSearch } from "../components/searchContext/page";
 import { useWishlist } from "../components/wishlistContext/page";
 import HeartOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import HeartFilledIcon from "@mui/icons-material/Favorite";
-
+//import Image from "next/image";
 
 interface Product {
   _id: string;
@@ -23,18 +21,12 @@ interface Product {
   subCategory: string;
 }
 
-
-interface Accessory extends Product {
-
-
-}
-
-const allAccessories = () => {
+const AllAccessories = () => {
   const [products, setProducts] = useState<Product[]>([]);
   // const { searchTerm } = useSearch();
   const router = useRouter();
   const { addToWishlist, wishlist, removeFromWishlist } = useWishlist();
-  const [selectedSize, setSelectedSize] = useState("S");
+  const [selectedSize] = useState("S");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -55,7 +47,9 @@ const allAccessories = () => {
   };
 
   const handleWishlistToggle = (product: Product) => {
-    const isAlreadyInWishlist = wishlist.some((item) => item._id === product._id);
+    const isAlreadyInWishlist = wishlist.some(
+      (item) => item._id === product._id
+    );
 
     if (isAlreadyInWishlist) {
       removeFromWishlist(product._id);
@@ -66,56 +60,52 @@ const allAccessories = () => {
         price: product.price,
         size: selectedSize,
         image: product.image[0],
-        category: product.category
+        category: product.category,
       });
     }
   };
-
 
   //const filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
     <div className={styles.productSection}>
       {products.map((product: Product) => {
-       const isWishlisted = wishlist.some((item) => item._id === product._id);
+        const isWishlisted = wishlist.some((item) => item._id === product._id);
 
-       return (
-        <div key={product._id} onClick={() => handleProduct(product._id)}>
-          <div className={styles.productCard}>
-            <div className={styles.buttonContent}>
-              <button 
-              className={styles.wishList} 
-              onClick={(e) => {
-
-                e.stopPropagation(); // Prevent navigation to single product page when clicking
-                handleWishlistToggle(product);
-
-              }}
-              >
-                {isWishlisted ? (
-                <HeartFilledIcon sx={{ color: "black", fontSize: 20 }} />
-              ) : (
-                <HeartOutlinedIcon sx={{fontSize: 20}} />
-              )}
-              </button>
+        return (
+          <div key={product._id} onClick={() => handleProduct(product._id)}>
+            <div className={styles.productCard}>
+              <div className={styles.buttonContent}>
+                <button
+                  className={styles.wishList}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent navigation to single product page when clicking
+                    handleWishlistToggle(product);
+                  }}
+                >
+                  {isWishlisted ? (
+                    <HeartFilledIcon sx={{ color: "black", fontSize: 20 }} />
+                  ) : (
+                    <HeartOutlinedIcon sx={{ fontSize: 20 }} />
+                  )}
+                </button>
+              </div>
+              {product.image.map((imgUrl, index) => (
+                <img
+                  key={index}
+                  src={imgUrl}
+                  alt={product.name}
+                  className={styles.productImage}
+                />
+              ))}
             </div>
-            {product.image.map((imgUrl, index) => (
-              <img
-                key={index}
-                src={imgUrl}
-                alt={product.name}
-                className={styles.productImage}
-              />
-            ))}
+            <h2 className={styles.productName}>{product.name}</h2>
+            <p className={styles.productPrice}>{product.price} kr</p>
           </div>
-          <h2 className={styles.productName}>{product.name}</h2>
-          <p className={styles.productPrice}>{product.price} kr</p>
-        </div>
-       )
-     })}
+        );
+      })}
     </div>
   );
 };
 
-
-export default allAccessories
+export default AllAccessories;

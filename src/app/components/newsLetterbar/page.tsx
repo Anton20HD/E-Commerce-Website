@@ -1,16 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import styles from "./page.module.scss"
-import { useRouter } from "next/navigation";
+import React from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
 const NewsLetterBar = () => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const router = useRouter();
+  // const [searchQuery, setSearchQuery] = useState<string>("");
+  // const router = useRouter();
 
   return (
     <Paper

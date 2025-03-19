@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import styles from "@/app/apparel/[id]/page.module.scss";
 import RelatedProducts from "@/app/components/relatedProducts/page";
 import { useCart } from "@/app/components/cartContext/page";
@@ -10,6 +10,7 @@ import HeartOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import HeartFilledIcon from "@mui/icons-material/Favorite";
 import { useSession } from "next-auth/react";
 import { CartItem } from "@/app/components/cartContext/page";
+//import Image from "next/image";
 
 interface Product {
   _id: string;
@@ -47,7 +48,7 @@ const AccessoryPage = () => {
         _id: product._id,
         name: product.name,
         price: product.price,
-        size: "onesize", 
+        size: "onesize",
         image: product.image[0],
         quantity: 1,
       };
@@ -55,7 +56,7 @@ const AccessoryPage = () => {
       const existingItem = cart.find(
         (item) => item._id === product._id && item.size === "onesize"
       );
-  
+
       if (existingItem) {
         return; // Prevent adding the same item again
       }
@@ -123,7 +124,7 @@ const AccessoryPage = () => {
       };
       fetchProduct();
     }
-  }, [id]);
+  }, [id, wishlist]);
 
   return product ? (
     <div>

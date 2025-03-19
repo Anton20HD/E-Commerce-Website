@@ -2,24 +2,40 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadStripe } from "@stripe/stripe-js";
 import styles from "@/app/success/page.module.scss";
 import shoppingBagCheck from "@/app/assets/shoppingBagCheck.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
+interface OrderItem {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  size: string;
+  quantity: number;
+}
+
+interface OrderDetails {
+  items: OrderItem[];
+  totalAmount: number;
+  customerName: string;
+  orderNumber: string;
+}
+
 const Success = () => {
   const { data: session } = useSession();
   const user = session?.user;
-  const [orderPlaced, setOrderPlaced] = useState(false);
-  const [orderDetails, setOrderDetails] = useState<any>({
+  //const [orderPlaced, setOrderPlaced] = useState(false);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails>({
     items: [],
     totalAmount: 0,
     customerName: "",
+    orderNumber: "",
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  
+
   const clearCartFromServer = async () => {
     if (user?.id) {
       try {
@@ -38,8 +54,8 @@ const Success = () => {
   };
 
   useEffect(() => {
-    if (!session && !localStorage.getItem("guestOrder")) return router.push("/checkout");
-
+    if (!session && !localStorage.getItem("guestOrder"))
+      return router.push("/checkout");
 
     const fetchSessionAndStoreOrder = async () => {
       const sessionId = new URLSearchParams(window.location.search).get(
@@ -85,13 +101,13 @@ const Success = () => {
         orderNumber: session.metadata.order_number || "N/A",
       });
 
-      setOrderPlaced(true);
+      //setOrderPlaced(true);
       setLoading(false);
       localStorage.removeItem("cartItems");
     };
 
     fetchSessionAndStoreOrder();
-  }, [router, user, session]);
+  }, [router, user, session, clearCartFromServer]);
 
   console.log("orderDetails", orderDetails);
 
@@ -136,7 +152,7 @@ const Success = () => {
       <div className={styles.orderDetailsSection}>
         {orderDetails.items.length > 0 ? (
           <ul className={styles.orderDetailsList}>
-            {orderDetails.items.map((item: any) => (
+            {orderDetails.items.map((item) => (
               <li
                 key={`${item._id}-${item.quantity}`}
                 className={styles.orderItem}

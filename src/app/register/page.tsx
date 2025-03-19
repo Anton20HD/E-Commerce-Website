@@ -231,6 +231,14 @@ const RegisterPage = () => {
             </div>
           </div>
         </form>
+        {error && (
+          <div className={styles.errorSection}>
+            <p className={styles.errorText}>
+              <ErrorIcon />
+              {error}
+            </p>
+          </div>
+           )}
       </div>
     </div>
   );

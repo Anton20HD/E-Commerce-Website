@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import styles from "@/app/login/page.module.scss";
 import homeIcon from "@/app/assets/GymBeast.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import ErrorIcon from '@mui/icons-material/Error';
+import ErrorIcon from "@mui/icons-material/Error";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -18,8 +18,7 @@ const LoginPage = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-
-  if(session) {
+  if (session) {
     router.push("/dashboard");
     return null;
   }
@@ -37,14 +36,14 @@ const LoginPage = () => {
     if (!email) {
       setEmailError("Email is required");
       isValid = false;
-    } else if(!/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+    } else if (!/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
       setEmailError("Email must be valid");
       isValid = false;
     }
 
     if (!password) {
       setPasswordError("Password is required");
-      isValid = false
+      isValid = false;
     }
 
     // If validation fails, stop execution
@@ -56,49 +55,43 @@ const LoginPage = () => {
         redirect: true, // prevents nextauth from redirecting automatically
         email,
         password,
-      })
-      
-      if(result?.error) {
-        setError(result.error)
+      });
+
+      if (result?.error) {
+        setError(result.error);
       } else {
         console.log("Login succesful!");
-
 
         const storedCart = localStorage.getItem("cartItems");
         if (storedCart) {
           const cartItems = JSON.parse(storedCart);
 
           if (cartItems > 0) {
-          const response = await fetch("/api/cart", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userId, cartItems})
-          })
+            const response = await fetch("/api/cart", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ userId, cartItems }),
+            });
 
-          if(!response.ok) {
-            setError("Failed to sync cart with the server");
-            return;
-          } else {
+            if (!response.ok) {
+              setError("Failed to sync cart with the server");
+              return;
+            } else {
               localStorage.removeItem("cartItems"); // Clear data after successful syncing
-              console.log("Cart synced with backend")
-            
+              console.log("Cart synced with backend");
+            }
           }
-
-        }
         }
 
         router.push("/dashboard");
-
       }
     } catch (err) {
       console.error("Error during login:", err);
-      setError("An error occurred. Please try again")
+      setError("An error occurred. Please try again");
     }
-
-  }
-  
+  };
 
   return (
     <div className={styles.loginContainer}>
@@ -122,27 +115,42 @@ const LoginPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <div className={styles.errorSection}>
-            {emailError && <p className={styles.errorText}><ErrorIcon/>{emailError}</p>}
+              {emailError && (
+                <p className={styles.errorText}>
+                  <ErrorIcon />
+                  {emailError}
+                </p>
+              )}
             </div>
             <input
               className={styles.loginLabel}
-              type="password" 
+              type="password"
               placeholder="Password"
-              name="password" 
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
 
             <div className={styles.errorSection}>
-            {passwordError && <p className={styles.errorText}><ErrorIcon/>{passwordError}</p>}
-            {error && <p className={styles.errorText}><ErrorIcon/>{error}</p>}
-              </div>
+              {passwordError && (
+                <p className={styles.errorText}>
+                  <ErrorIcon />
+                  {passwordError}
+                </p>
+              )}
+              {error && (
+                <p className={styles.errorText}>
+                  <ErrorIcon />
+                  {error}
+                </p>
+              )}
+            </div>
             <button type="submit" className={styles.loginButton}>
               Login
             </button>
             <div className={styles.registrationSection}>
               <h3 className={styles.registrationText}>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href={"/register"}>
                   <span className={styles.registrationSpanText}>
                     Sign up here!

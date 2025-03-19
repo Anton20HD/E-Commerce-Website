@@ -1,23 +1,27 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function GET(req: Request) {
-    const url = new URL(req.url);
-    const sessionId = url.searchParams.get("session_id");
+  const url = new URL(req.url);
+  const sessionId = url.searchParams.get("session_id");
 
-    if(!sessionId) {
-        return NextResponse.json({ error: "No session id provided" }, { status: 400 });
-    }
+  if (!sessionId) {
+    return NextResponse.json(
+      { error: "No session id provided" },
+      { status: 400 }
+    );
+  }
 
-    try {
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-        const session = await stripe.checkout.sessions.retrieve(sessionId);
-
-        return NextResponse.json(session, { status: 200 });
-    } catch (error) {
-        console.error("Error fetching session", error);
-        return NextResponse.json({ error: "Error fetching session" }, { status: 500 });
-    }
+    return NextResponse.json(session, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching session", error);
+    return NextResponse.json(
+      { error: "Error fetching session" },
+      { status: 500 }
+    );
+  }
 }

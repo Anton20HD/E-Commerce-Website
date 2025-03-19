@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import React, { useState } from "react";
 import styles from "@/app/checkout/page.module.scss";
-import RelatedProducts from "@/app/components/relatedProducts/page";
 import { useCart } from "@/app/components/cartContext/page";
 import { loadStripe } from "@stripe/stripe-js";
 import ErrorIcon from '@mui/icons-material/Error';

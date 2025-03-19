@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import productModel from "@/models/productModel";
-import { User } from "@/models/userModel";
 import connectDB from "@/libs/db/mongodb";
 import { uploadToCloudinary, CloudinaryResult } from "@/libs/cloud/cloudinary";
 

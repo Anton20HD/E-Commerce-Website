@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "@/app/startPage/page.module.scss";
 //import Products from "@/app/components/products/page";
 import CategoryPage from "@/app/categoryPage/page";

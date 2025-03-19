@@ -2,14 +2,12 @@
 "use client"
 
 import { usePathname } from 'next/navigation'; 
-import type { Metadata } from "next";
 import "../styles/globals.scss";
 import Footer from "./components/footer/page";
 import Header from "./components/header/page";
 import { CartProvider } from "./components/cartContext/page";
 import { SearchProvider } from "./components/searchContext/page";
 import { WishlistProvider } from "./components/wishlistContext/page";
-import RegisterPage from './register/page';
 import { SessionProvider } from "next-auth/react";
 
 //  export const metadata: Metadata = {

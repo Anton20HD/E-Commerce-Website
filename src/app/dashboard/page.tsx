@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/app/dashboard/page.module.scss";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -8,13 +8,31 @@ import HeartIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 
+interface Product {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  size: string;
+}
+
+interface Order {
+  _id: string;
+  orderNumber: string;
+  paid: boolean;
+  totalPrice: number;
+  createdAt: string;
+  products: Product[];
+}
+
 const DashboardPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [activeLink, setActiveLink] = useState<
     "orders" | "wishlist" | "signout"
   >("orders");
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -135,7 +153,7 @@ const DashboardPage = () => {
 
               {orders.length > 0 && (
                 <div>
-                  {orders.map((order: any) => (
+                  {orders.map((order) => (
                     <div key={order._id} className={styles.orderCard}>
                       <div className={styles.orderStatusAndPriceSection}>
                         <h3 className={styles.orderNumber}>

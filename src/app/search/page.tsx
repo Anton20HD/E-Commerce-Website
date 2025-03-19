@@ -17,8 +17,8 @@ const SearchPage = () => {
         <h1 className={styles.searchPageTitle}>No Results Found</h1>
         <div className={styles.searchPageContent}>
           <p className={styles.noResultsText}>
-            Sorry, we couldn't find any results for "
-            <span className={styles.searchQueryWord}>{query}</span>".
+            Sorry, we couldn&apos;t find any results for &quot;
+            <span className={styles.searchQueryWord}>{query}</span>&quot;.
           </p>
           <p className={styles.noResultsText}>
             Please try searching with a different term.

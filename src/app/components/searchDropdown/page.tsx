@@ -9,7 +9,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSearch } from "../searchContext/page";
 import styles from "@/app/components/searchDropdown/page.module.scss";
 import HeartIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import SearchBar from "../searchBar/page";
 import homeIcon from "@/app/assets/GymBeast.svg";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -142,7 +141,7 @@ const ProductSearchDropdown = ({
           <div className={styles.noResultsSection}>
             <h2 className={styles.noResultsTitle}>No results found</h2>
             <p className={styles.noResultsText}>
-              We didnt find anything for "{searchTerm}"{" "}
+            We didn&apos;t find anything for &quot;{searchTerm}&quot;
             </p>
           </div>
         )}

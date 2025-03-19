@@ -23,10 +23,10 @@ interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
+const ls = typeof window !== "undefined" ? window.localStorage : null;
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const ls = typeof window !== "undefined" ? window.localStorage : null;
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [cart, setCart] = useState<CartItem[]>([]);
   const localStorageKey = "cartItems";
 
@@ -93,13 +93,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (status === "authenticated" || status === "unauthenticated") {
       fetchCart();
     }
-  }, [status]);
+  }, [status, ls]);
 
   useEffect(() => {
     if (status === "unauthenticated" && ls) {
       ls.setItem(localStorageKey, JSON.stringify(cart));
     }
-  }, [cart, status]);
+  }, [cart, status, ls]);
 
   const addToCart = (item: CartItem) => {
     setCart((prevCart) => {
