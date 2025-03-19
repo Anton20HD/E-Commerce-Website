@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { User } from "@/models/userModel"
 import { CartItem } from "@/app/components/cartContext/page";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/libs/authOptions"; 
 import connectDB from "@/libs/db/mongodb";
 
 export async function POST(req: Request) {
