@@ -1,31 +1,29 @@
 "use client";
 
 import React from "react";
-import styles from "@/app/components/cart/page.module.scss";
+import styles from "@/components/Cart/Cart.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { useCart } from "../cartContext/page";
+import { useCart } from "../CartContext/CartContext";
 import Link from "next/link";
-import { CartItem } from "../cartContext/page";
+import { CartItem } from "../CartContext/CartContext";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
 
-interface CartProps {
-  toggleMenu: () => void;
-  isVisible: boolean;
-}
 
-const Cart = ({ toggleMenu, isVisible }: CartProps) => {
+const Cart = () => {
   const {
     cart,
     removeFromCart,
     calculateTotalPrice,
     updateCartQuantity,
+    isVisible,
+    toggleMenu,
   } = useCart();
   const router = useRouter();
 
   const handleCheckout = () => {
-    toggleMenu();
+   
     router.push(`/checkout`);
   };
 

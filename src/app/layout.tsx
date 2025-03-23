@@ -3,11 +3,11 @@
 
 import { usePathname } from 'next/navigation'; 
 import "../styles/globals.scss";
-import Footer from "./components/footer/page";
-import Header from "./components/header/page";
-import { CartProvider } from "./components/cartContext/page";
-import { SearchProvider } from "./components/searchContext/page";
-import { WishlistProvider } from "./components/wishlistContext/page";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import CartProvider from "@/components/CartContext/CartContext";
+import { SearchProvider } from "../components/SearchContext/SearchContext";
+import { WishlistProvider } from "../components/WishlistContext/WishlistContext";
 import { SessionProvider } from "next-auth/react";
 
 //  export const metadata: Metadata = {

@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "@/app/wishlist/page.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { useWishlist } from "@/app/components/wishlistContext/page";
-import { useCart } from "../components/cartContext/page";
+import { useWishlist } from "@/components/WishlistContext/WishlistContext";
+import { useCart } from "../../components/CartContext/CartContext";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 

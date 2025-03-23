@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/app/apparel/page.module.scss";
 //import { useSearch } from "../components/searchContext/page";
-import { useWishlist } from "../components/wishlistContext/page";
+import { useWishlist } from "../../components/WishlistContext/WishlistContext";
 import HeartOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import HeartFilledIcon from "@mui/icons-material/Favorite";
 //import Image from "next/image";

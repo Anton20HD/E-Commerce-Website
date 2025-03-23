@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./page.module.scss";
+import styles from "./SearchBar.module.scss";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import ProductSearchDropdown from "../searchDropdown/page";
+import ProductSearchDropdown from "../SearchDropdown/SearchDropdown";
 
 const SearchBar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);

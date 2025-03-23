@@ -1,15 +1,18 @@
-  import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
   import productModel from "@/models/productModel";
   import connectDB from "@/libs/db/mongodb";
-
-  export async function GET(
-    req: Request,
-    { params }: { params: { id: string } }
-  ) {
+ 
+  export async function GET(req: NextRequest) {
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); 
+  
+    if (!id) {
+      return NextResponse.json({ message: "Product not found" }, { status: 404 });
+    }
     await connectDB();
 
     try {
-      const product = await productModel.findById(params.id);
+      const product = await productModel.findById(id);
       if (!product) {
         return NextResponse.json(
           { message: "Product not found" },

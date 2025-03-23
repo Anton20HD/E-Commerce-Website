@@ -1,31 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
-import styles from "@/app/components/header/page.module.scss";
+import React from "react";
+import styles from "./Header.module.scss";
 import homeIcon from "@/app/assets/GymBeast.svg";
-import SearchBar from "../searchBar/page";
+import SearchBar from "../SearchBar/SearchBar";
 import HeartIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonIcon from "@mui/icons-material/PersonOutlineOutlined";
 import CartIcon from "@mui/icons-material/LocalMallOutlined";
-import ButtonContent from "../buttons/page";
+import ButtonContent from "../Buttons/Buttons";
 import Link from "next/link";
-import Cart from "../cart/page";
-import { useCart } from "../cartContext/page";
-import { useWishlist } from "../wishlistContext/page";
+import Cart from "../Cart/Cart";
+import { useCart } from "../CartContext/CartContext";
+import { useWishlist } from "../WishlistContext/WishlistContext";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [isCartVisible, setIsCartVisible] = useState(false);
-  const { cart } = useCart();
+  const { cart, isVisible, toggleMenu } = useCart();
   const { wishlist } = useWishlist();
-  const {data: session } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
-
-  const toggleCart = () => {
-    setIsCartVisible((prevState) => !prevState);
-  };
-
 
   const handleProfileClick = () => {
     if (session) {
@@ -37,8 +31,8 @@ const Header = () => {
 
   return (
     <>
-      {isCartVisible && (
-        <div className={styles.overlay} onClick={toggleCart}></div>
+      {isVisible && (
+        <div className={styles.overlay} onClick={toggleMenu}></div>
       )}
 
       <div className={styles.headerContent}>
@@ -65,14 +59,14 @@ const Header = () => {
           <div className={styles.profileButton} onClick={handleProfileClick}>
             <PersonIcon className={styles.personIcon} />
           </div>
-          <div className={styles.cartButton} onClick={toggleCart}>
+          <div className={styles.cartButton} onClick={toggleMenu}>
             <CartIcon />
             {cart.length > 0 && (
               <div className={styles.cartCounter}>{cart.length}</div>
             )}
           </div>
         </div>
-        <Cart toggleMenu={toggleCart} isVisible={isCartVisible} />
+        <Cart />
       </div>
     </>
   );

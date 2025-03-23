@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react";
-import styles from "@/app/components/relatedProducts/page.module.scss";
+import styles from "./RelatedProducts.module.scss";
 import { useRouter } from "next/navigation";
 
 interface RelatedProducts {

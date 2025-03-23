@@ -20,17 +20,23 @@ interface CartContextType {
   removeFromCart: (itemId: string, size: string) => void;
   calculateTotalPrice: (itemId: string, itemSize: string, itemPrice: number) => number;
   updateCartQuantity: (itemId: string, size: string, quantity: number) => void;
+  isVisible: boolean;
+  toggleMenu: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 const ls = typeof window !== "undefined" ? window.localStorage : null;
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
+
+export default function CartProvider ({ children }: { children: ReactNode }) {
   const { status } = useSession();
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
   const localStorageKey = "cartItems";
 
-  // Merge guest cart with user cart
+  const toggleMenu = () => setIsVisible((prev) => !prev);
+
+  // Merge guest cart with user car
   const mergeCarts = (userCart: CartItem[], guestCart: CartItem[]) => {
     const mergedCart = [...userCart];
 
@@ -170,6 +176,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         calculateTotalPrice,
         updateCartQuantity,
+        isVisible,
+        toggleMenu,
       }}
     >
       {children}

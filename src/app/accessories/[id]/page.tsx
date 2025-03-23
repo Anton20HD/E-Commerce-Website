@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import styles from "@/app/apparel/[id]/page.module.scss";
-import RelatedProducts from "@/app/components/relatedProducts/page";
-import { useCart } from "@/app/components/cartContext/page";
-import { useWishlist } from "@/app/components/wishlistContext/page";
+import RelatedProducts from "@/components/RelatedProducts/RelatedProducts";
+import { useCart } from "@/components/CartContext/CartContext";
+import { useWishlist } from "@/components/WishlistContext/WishlistContext";
 import HeartOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import HeartFilledIcon from "@mui/icons-material/Favorite";
 import { useSession } from "next-auth/react";
-import { CartItem } from "@/app/components/cartContext/page";
+import { CartItem } from "@/components/CartContext/CartContext";
 //import Image from "next/image";
 
 interface Product {

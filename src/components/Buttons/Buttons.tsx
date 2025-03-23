@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "@/app/components/buttons/page.module.scss";
+import styles from "@/components/Buttons/Buttons.module.scss";
 import Link from "next/link";
 
 const ButtonContent = () => {

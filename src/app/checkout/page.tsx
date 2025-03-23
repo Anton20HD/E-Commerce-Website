@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "@/app/checkout/page.module.scss";
-import { useCart } from "@/app/components/cartContext/page";
+import { useCart } from "@/components/CartContext/CartContext";
 import { loadStripe } from "@stripe/stripe-js";
 import ErrorIcon from '@mui/icons-material/Error';
 

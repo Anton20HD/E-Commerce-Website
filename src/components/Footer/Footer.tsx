@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./page.module.scss";
+import styles from "./Footer.module.scss";
 import homeIcon from "@/app/assets/GymBeast.svg";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ import {
   faInstagram,
   faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
-import NewsLetterBar from "../newsLetterbar/page";
+import NewsLetterBar from "../NewsLetterBar/NewsLetterBar";
 
 const Footer = () => {
   return (
