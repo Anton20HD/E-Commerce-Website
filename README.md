@@ -1,6 +1,6 @@
 # GymBeast E-Commerce Website
 
-Welcome to the **GymBeast E-Commerce Website**! This is a fully functional e-commerce platform designed for selling gym accessories and apparel. Built using Next.js, React, TypeScript, MongoDB, and Stripe, this project showcases a modern and scalable e-commerce solution.
+Welcome to the **GymBeast E-Commerce Website**! This is an e-commerce platform designed for selling gym accessories and apparel. Built using Next.js, React, TypeScript, MongoDB, and Stripe, this project showcases a modern and scalable e-commerce solution.
 
 ## Features
 
