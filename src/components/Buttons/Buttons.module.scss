@@ -109,3 +109,21 @@
     display: flex;
     font-weight: bold;
   }
+
+  @media (max-width: 768px) {
+
+    .buttonContainer {
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: center;
+      align-items: center;
+    }
+
+    .headerButtons {
+      display: none;
+    }
+
+    
+    
+   
+  }

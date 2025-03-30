@@ -7,6 +7,7 @@
   gap: 20px;
   width: 100%;
   padding: 20px;
+  margin-bottom: 100px;
 
 
 }
@@ -80,4 +81,95 @@
 
   font-family: $secondfont;
   font-weight: 400;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .productSection {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    width: 85%;
+    padding: 20px;
+    margin-bottom: 100px;
+  
+  
+  }
+  
+  
+  .buttonContent {
+  
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  
+  .wishList {
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: .6rem;
+    margin: .2rem;
+    border: 0;
+    margin-left: auto;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #d2caca;
+  
+  
+  }
+  
+  .heartIcon {
+  
+  
+    height: 15px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .productCard {
+  
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .productImage {
+  
+    height: 200px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .productImage:hover {
+  
+    transform: scale(1.1);
+  }
+  
+  .productName {
+  
+    font-family: $primaryfont;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  
+  .productPrice {
+  
+    font-family: $secondfont;
+    font-weight: 400;
+  }
+  
+  
+  
 }

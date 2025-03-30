@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { User } from "@/models/userModel";
 import connectDB from "@/libs/db/mongodb";
 
+
+//TODO: Synka frontend/backend regex för namn.
 export async function POST(req: Request) {
   try {
     await connectDB();

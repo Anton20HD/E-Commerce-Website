@@ -213,3 +213,222 @@
 
     max-width: 100px;
 }
+
+@media (max-width: 768px) {
+   
+
+    .wishlistContainer {
+
+        display: flex;
+        flex-direction: column;
+        width: 120vh;
+        margin-left: 50px;
+    }
+    
+    .wishlistContent {
+    
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        // height: calc(100vh - 120px); // Pushes other content to the bottom
+        position: relative; // Make the content inside to always be in the same spot( good to have if you are using absolute somewhere)z
+    }
+    
+    .wishlistTitleContent {
+    
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .wishlistItem {
+    
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 50px;
+        border-bottom: 1px solid #ddd;
+        margin-top: 10px;
+    }
+    
+    .emptyWishlistTitle {
+    
+        font-family: $primaryfont;
+        font-weight: 300;
+        font-size: 20px;
+    }
+    
+    .itemDetails {
+    
+        line-height: 15px;
+        font-family: $secondfont;
+        font-size: 16px;
+        color: gray;
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        position: relative;
+    }
+    
+    .sizeDetails {
+    
+    
+        position: relative;
+    }
+    
+    .productInfo {
+    
+        line-height: 10px;
+    
+    }
+    
+    .itemName {
+    
+        color: black;
+        font-family: $primaryfont;
+        font-weight: 300;
+    }
+    
+    .itemPrice {
+    
+        color: black;
+        font-weight: 400;
+        font-family: $secondfont;
+    
+    }
+    
+    .wishlistTitle {
+        font-family: $primaryfont;
+        font-weight: 300;
+    }
+    
+    .wishlistItemImage {
+        width: 280px;
+        height: 330px;
+        object-fit: cover;
+    }
+    
+    .navCloseIcon {
+        //padding: 10px; 
+        font-weight: lighter;
+        display: flex;
+        margin-right: 10px;
+        justify-content: flex-end;
+    }
+    
+    .closeIcon {
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+    }
+    
+    
+    .wishlistWrapper {
+    
+        display: grid;
+        grid-template-columns: 1fr; // Reserve space for the image and make the rest flexible
+        gap: 20px;
+    }
+    
+    .addToCartButton {
+    
+    
+        background-color: black;
+        cursor: pointer;
+        height: 50px;
+        width: 300px;
+        align-self: stretch;
+        max-width: 100%;
+        color: white;
+        border-radius: 15px;
+        border: solid 1px #ccc;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: larger;
+    }
+    
+    .sizeAndAddProductSection {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: auto;
+    }
+    
+    .dropdownButton {
+    
+        color: black;
+    }
+    
+    .dropdownMenu {
+    
+        background-color: #fff;
+        color: black;
+        font-family: $secondfont;
+        font-weight: lighter;
+        font-size: 15px;
+        transition: transform 0.3s ease;
+        position: absolute; // Relative to its container
+        top: 100%; // Positioning below the button
+        left: 0;
+        width: 300px;
+        border-radius: 5px;
+        z-index: 20; // Prevent to hide behind other content
+        margin-bottom: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        //border: 1px solid black;
+    
+    }
+    
+    
+    .dropdownMenu ul li {
+    
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        list-style: none;
+        line-height: 50px;
+        width: 100%;
+    }
+    
+    
+    .dropdownMenu ul {
+    
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+    }
+    
+    .sizeInfo {
+    
+        margin-left: 10px;
+    }
+    
+    .dropdownMenu ul li:hover a {
+    
+        cursor: pointer;
+    }
+    
+    
+    .chooseSizeSection {
+    
+        border: 1px solid black;
+        height: 50px;
+        width: 300px;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        color: black;
+        font-family: $secondfont;
+        font-size: 15px;
+        justify-content: space-between;
+        cursor:pointer;
+    }
+    
+    .chooseSize {
+    
+        margin-left: 10px;
+    }
+    
+    .dropdownItem a {
+    
+        max-width: 100px;
+    }
+    
+    
+    
+  }

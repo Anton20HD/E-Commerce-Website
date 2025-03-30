@@ -146,7 +146,8 @@
   background-color: black;
   cursor: pointer;
   height: 50px;
-  width: 90%;
+  width: 70%;
+  margin-left: 5vm;
   color: white;
   border-radius: 20px;
   border: solid 1px #ccc;
@@ -236,4 +237,251 @@
     height: 20px;
     width: 20px;
     font-weight:normal;
+}
+
+@media (max-width: 768px) {
+   
+
+  .cartContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background: white;
+    transform: translateX(100%); //start hidden
+    transition: transform 0.3s ease; //Animation for sliding 
+    z-index: 2; // ensure its above all content
+  }
+  
+  .open {
+    transform: translateX(0);
+  }
+  
+  .navCloseIcon {
+    cursor: pointer;
+    //padding: 10px; 
+    font-weight: lighter;
+    display: flex;
+    margin-right: 30px;
+    justify-content: flex-end;
+  }
+  
+  .closeIcon {
+    height: 30px;
+    width: 30px;
+  }
+  
+  
+  .titleSection {
+    display: flex;
+    margin-top: 5px;
+    margin-left: 40px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+  
+  
+  .cartItem {
+  
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-top: 10px;
+  }
+  
+  .cartItemImage {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    margin-left: 20px;
+  }
+  
+  .productContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 100%;
+    height: calc(100vh - 120px); // Pushes other content to the bottom
+    overflow-x: hidden;
+    position: relative; // Make the content inside to always be in the same spot( good to have if you are using absolute somewhere)
+  }
+  
+  
+  .itemDetails {
+  
+    line-height: 10px;
+    font-family: $secondfont;
+    font-size: 16px;
+    color: gray;
+  }
+  
+  .itemName {
+  
+    color: black;
+    font-family: $primaryfont;
+    font-weight: 300;
+  }
+  
+  .itemPrice {
+  
+    color: black;
+    font-weight: 400;
+  }
+  
+  .emptyCartTitle {
+  
+    font-family: $primaryfont;
+    font-weight: 300;
+    font-size: 25px;
+  }
+  
+  .cartInfo {}
+  
+  .cartTitle {
+  
+    font-weight: 300;
+    font-family: $primaryfont;
+  
+  }
+  
+  .emptyCartSection {
+  
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    //margin-top: 30vh;
+  
+  }
+  
+  .navigateButton {
+    background-color: black;
+    cursor: pointer;
+    height: 50px;
+    width: 100%;
+    color: white;
+    border-radius: 20px;
+    border: solid 1px #ccc;
+    font-family: $primaryfont;
+    font-size: larger;
+    padding: 10px;
+    margin: 5px;
+  }
+  
+  .buttonSection {}
+  
+  
+  .orderInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: auto;
+    background-color: #f9f9f9;
+  }
+  
+  .paymentButton {
+    background-color: black;
+    cursor: pointer;
+    height: 50px;
+    width: 90%;
+    color: white;
+    border-radius: 20px;
+    border: solid 1px #ccc;
+    font-family: $primaryfont;
+    font-size: larger;
+    padding: 10px;
+    //margin: auto;
+  }
+  
+  
+  
+  .deleteButton {
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background: black;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
+  
+  
+  .totalPriceSection {
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+  }
+  
+  .totalLabel {
+    font-weight: bold;
+    //width: 100%;
+    //padding-left: 15%;
+    font-family: $secondfont;
+    font-size: 16px;
+  }
+  
+  .totalPrice {
+    font-family: $secondfont;
+    //text-align: right;
+    font-weight: bold;
+  }
+  
+  .quantityButton {
+  
+    color:  black;
+    background-color: white;
+    padding: 5px;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    //border-radius: 5px;
+    border: solid 1px #ccc;
+    transition: color 0.5s;
+  }
+  
+  .quantityButton:hover {
+  
+    border: solid 1px black;
+  }
+  
+  
+  .removeSection {
+  
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: -10px;
+    right: 0px;
+    position: absolute;
+    margin-right: 30px;
+  }
+  
+  .quantityNumber {
+  
+    font-weight: bold;
+    color: black;
+    font-family: $secondfont;
+  }
+  
+  .quantityIcon {
+  
+      height: 20px;
+      width: 20px;
+      font-weight:normal;
+  }
+  
+  
+  
 }

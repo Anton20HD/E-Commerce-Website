@@ -1,15 +1,231 @@
 @import "../../styles/variables.scss";
 
 .searchBarContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+
+}
+
+.searchDropdownContainer {
+  position: fixed; // Makes dropdown indepentent to its parent containers
+  top: 0; // Align to the top of the viewport 
+  left: 0; // Align to the left of the viewport 
+  width: 100vw; //Cover the full viewport width
+  max-height: 300px;
+  background: white;
+  opacity: 0;
+  z-index: 2; // Ensure its above other elements
+  padding: 20px;
+  transform: translateY(-100%);
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+
+}
+
+.open {
+  max-height: 700px;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
+
+
+.dropdownContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  color: white;
+
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  margin-left: 50px;
+  //cursor: pointer;
+  //z-index: 3;
+  display: flex;
+}
+
+.iconContent {
+  margin-top: -10px;
+}
+
+.searchBar {
+
+  height: 50px;
+}
+
+
+.navCloseIconContent {
+  //cursor: pointer;
+  //padding: 10px; 
+  font-weight: lighter;
+  display: flex;
+  //margin-right: 10px;
+  //justify-content: flex-end;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+
+.closeIconWrapper {
+
+  display: flex;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 90px;
+}
+
+.closeIcon {
+  height: 40px;
+  width: 40px;
+  display: block;
+  font-weight: lighter;
+}
+
+.wishList {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: .6rem;
+  margin: .2rem;
+  border: 0;
+  margin-left: auto;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #d2caca;
+
+
+}
+
+.heartIcon {
+
+
+  height: 15px;
+  width: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.productCard {
+
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.productImage {
+
+  height: 350px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.productImage:hover {
+
+  transform: scale(1.1);
+}
+
+.productName {
+
+  font-family: $secondfont;
+  font-size: medium;
+  font-weight: normal;
+}
+
+.productPrice {
+
+  font-family: $secondfont;
+  font-weight: bold;
+}
+
+
+.productSection {
+
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+
+}
+
+
+.recentSearchesSection {
+
+  margin-left: 50px;
+  flex-direction: column;
+  display: flex;
+  align-items: flex-start;
+}
+
+.recentSearchesTitle {
+
+  font-family: $primaryfont;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.recentSearchItem {
+
+  list-style-type: none;
+  font-family: $secondfont;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  gap: 8px;
+}
+
+
+.noResultsTitle {
+
+  font-family: $primaryfont;
+  font-size: 20px;
+
+
+}
+
+.noResultsSection {
+  margin-left: 50px;
+
+}
+
+
+.noResultsText {
+
+  font-family: $secondfont;
+  font-size: 15px;
+
+
+}
+
+@media (max-width: 768px) {
+
+  .searchBarContent {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px;
     border-bottom: 1px solid #ddd;
-    width: 100%;
-   
-}
+    width: 50%;
 
-.searchDropdownContainer {
+  }
+
+  .searchDropdownContainer {
     position: fixed; // Makes dropdown indepentent to its parent containers
     top: 0; // Align to the top of the viewport 
     left: 0; // Align to the left of the viewport 
@@ -22,47 +238,41 @@
     transform: translateY(-100%);
     transition: max-height 0.3s ease, opacity 0.3s ease;
 
-}
+  }
 
-.open {
+  .open {
     max-height: 700px;
     transform: translateY(0);
     opacity: 1;
-}
+  }
 
 
 
 
 
-.dropdownContent {
+  .dropdownContent {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     color: white;
 
-}
+  }
 
-.icon {
-    width: 100px;
-    height: 100px;
-    margin-left: 50px;
-    //cursor: pointer;
-    //z-index: 3;
-    display: flex;
-}
+  .icon {
+    display: none;
+  }
 
-.iconContent {
-    margin-top: -10px;
-}
 
-.searchBar {
+  .searchBar {
 
     height: 50px;
-}
+    width: 300px;
+    margin-left: -60px;
+  }
 
 
-.navCloseIconContent {
+  .navCloseIconContent {
     //cursor: pointer;
     //padding: 10px; 
     font-weight: lighter;
@@ -71,32 +281,35 @@
     //justify-content: flex-end;
     justify-content: space-around;
     align-items: flex-start;
-}
+    margin-left: -6vw;
+  }
 
 
-.closeIconWrapper {
+  .closeIconWrapper {
 
     display: flex;
     cursor: pointer;
     margin-left: auto;
     margin-right: 90px;
-}
+  }
 
-.closeIcon {
-    height: 40px;
-    width: 40px;
+  .closeIcon {
+    height: 8vw;
+    width: 8vw;
+    max-width: 40px;
+    max-height: 40px;
     display: block;
     font-weight: lighter;
-}
+  }
 
-.wishList {
+  .wishList {
 
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2rem;
-    height: 2rem;
-    padding: .6rem;
+    width: 1rem;
+    height: 1rem;
+    padding: .8rem;
     margin: .2rem;
     border: 0;
     margin-left: auto;
@@ -104,50 +317,51 @@
     border-radius: 50%;
     background-color: white;
     border: 1px solid #d2caca;
-  
-  
+
+
   }
-  
+
   .heartIcon {
-  
-  
+
+
     height: 15px;
     width: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
   }
-  
+
   .productCard {
-  
+
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
+    height: 150px;
   }
-  
+
   .productImage {
-  
-    height: 350px;
+
+    height: 120px;
     transition: transform 0.3s ease-in-out;
   }
-  
+
   .productImage:hover {
-  
+
     transform: scale(1.1);
   }
-  
+
   .productName {
-  
+
     font-family: $secondfont;
     font-size: medium;
     font-weight: normal;
   }
-  
+
   .productPrice {
-  
+
     font-family: $secondfont;
     font-weight: bold;
   }
@@ -155,12 +369,12 @@
 
   .productSection {
 
-    
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  width: 100%;
-  padding: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    width: 50%;
+    padding: 20px;
 
   }
 
@@ -188,7 +402,7 @@
     display: flex;
     align-items: center;
     margin-left: 0;
-    gap: 8px;   
+    gap: 8px;
   }
 
 
@@ -197,14 +411,14 @@
     font-family: $primaryfont;
     font-size: 20px;
 
-  
+
   }
 
   .noResultsSection {
     margin-left: 50px;
 
   }
- 
+
 
   .noResultsText {
 
@@ -213,3 +427,5 @@
 
 
   }
+
+}

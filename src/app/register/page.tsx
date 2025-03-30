@@ -7,6 +7,9 @@ import Link from "next/link";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useRouter } from "next/navigation";
 
+
+
+//TODO: Synka frontend/backend regex för namn.
 const RegisterPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");

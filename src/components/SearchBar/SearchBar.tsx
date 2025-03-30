@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React  from "react";
 import styles from "./SearchBar.module.scss";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -8,13 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ProductSearchDropdown from "../SearchDropdown/SearchDropdown";
 
-const SearchBar = () => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+interface SearchBarProps {
+  isDropdownVisible: boolean;
+  toggleDropdown: () => void;
+}
 
-  const toggleDropdown = () => {
-    setIsDropdownVisible((prevState) => !prevState);
-  };
-
+const SearchBar: React.FC<SearchBarProps> = ({ isDropdownVisible, toggleDropdown }) => {
 
   return (
     <>
@@ -24,7 +23,11 @@ const SearchBar = () => {
     <div className={styles.searchBarContainer}>
       <Paper
         component="form"
-        onClick={toggleDropdown}
+        onClick={(e) => {
+
+          e.stopPropagation();
+          toggleDropdown(); 
+        }}
         sx={{
           p: "2px 4px",
           display: "flex",
@@ -44,7 +47,7 @@ const SearchBar = () => {
           inputProps={{ "aria-label": "search clothes" }}
         />
       </Paper>
-      <ProductSearchDropdown toggleDropdown={toggleDropdown} isVisible={isDropdownVisible}/>
+      {isDropdownVisible && <ProductSearchDropdown toggleDropdown={toggleDropdown} isVisible={isDropdownVisible} />}
     </div>
     </>
   );

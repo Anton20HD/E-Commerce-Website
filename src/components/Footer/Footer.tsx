@@ -89,7 +89,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faFacebookF} className={styles.icon} size="xs" />
+          <FontAwesomeIcon icon={faFacebookF}  />
         </a>
       </div>
         </div>

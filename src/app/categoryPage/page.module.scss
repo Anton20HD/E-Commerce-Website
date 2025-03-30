@@ -69,3 +69,74 @@
 .categoryButton:hover {
         opacity: 0.6;
 }
+
+@media (max-width: 768px) {
+   
+    .categoryContainer {
+    width: 100%;
+    background-size: cover;
+}
+
+.categorySection {
+    display: grid;
+    grid-template-columns: 1fr; //Takes 50% of width
+    gap:5px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.clothesImg {
+    width:100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+.accessoriesImg {
+
+    width:100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.buttonSection {
+
+    display: flex;
+    gap: 10px;
+    //position: absolute; // positions it indepentently of slider
+    right: 50px;
+    bottom: 0; //center it vertically
+    transform: translateY(-50%); //adjusts to vertically center
+   // z-index: 10; // Stays above slider content
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.categoryButton {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%); // center button in the middle
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    text-transform: uppercase;
+    font-family: $primaryfont;
+    letter-spacing: 0.1em;
+    font-weight:lighter;
+    font-size: 20px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.categoryButton:hover {
+        opacity: 0.6;
+}
+  }

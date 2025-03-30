@@ -188,3 +188,209 @@
     display: flex;
    
 }
+
+
+@media (max-width: 768px) {
+   
+
+    
+    
+.checkoutContainer {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1fr));
+    grid-gap: 20px;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+}
+
+.checkoutTitleSection {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.cartItemImage {
+    height: 200px;
+    width: 180px;
+}
+
+.cartItem {
+
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.cartSection {
+    border-bottom: 1px solid rgb(230, 230, 230);
+    
+
+}
+
+.productContent {
+    background-color: white;
+    //margin: auto;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+
+}
+
+.orderInfo {
+
+    background-color: white;
+    margin: 0;
+    width: 900px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 80px;
+    margin-right: auto;
+}
+
+.inputInfo {
+
+    //display: flex;
+   // flex-direction: column;
+   margin-right: auto;
+   margin-bottom: -80px;
+    gap: 15px;
+}
+
+.addressLabel {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.checkoutLabel {
+    padding: 15px;
+    width: 15rem;
+    border-radius: 5px;
+    border: 1px solid rgb(230, 230, 230);
+    font-family: $secondfont;
+
+
+    &::placeholder {
+        font-size: 15px;
+        color: #aaa;
+        font-family: $secondfont;
+        font-weight: 300;
+    }
+}
+
+.checkoutTitle {
+
+    font-family: $primaryfont;
+    font-size: 30px;
+    //font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.shippingTitle {
+
+    font-family: $primaryfont;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.cartTitle {
+    font-weight: 300;
+    font-family: $primaryfont;
+}
+
+.itemDetails {
+
+    line-height: 1px;
+    gap:1px;
+    font-family: $secondfont;
+    font-size: 16px;
+    color: gray;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 30px;
+   
+}
+
+.itemName {
+
+    color: black;
+    font-family: $primaryfont;
+    font-weight: 300;
+}
+
+.itemPrice {
+
+    color: black;
+    font-weight: 400; 
+}
+
+.totalLabel {
+
+    color: black;
+    font-family: $secondfont;
+    font-weight: 300;
+    font-size: 17px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.totalPrice {
+
+    color: black;
+    font-weight: 600;
+    font-family: $secondfont;
+    font-size: 20px;
+}
+
+.paymentButton {
+    background-color: black;
+    margin-right: auto;
+    cursor: pointer;
+    height: 50px;
+    width: 35%;
+    color: white;
+    border-radius: 15px;
+    border: solid 1px #ccc;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: larger;
+    padding: 10px;
+}
+
+.shippingSection {}
+
+
+.errorText {
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color: darkred;
+    font-family: $secondfont;
+    gap: 10px;
+    font-size: 13px;
+}
+
+
+.errorSection {
+
+    display: flex;
+   
+}
+
+    
+    
+  }

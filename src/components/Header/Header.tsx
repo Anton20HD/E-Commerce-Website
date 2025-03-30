@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import homeIcon from "@/app/assets/GymBeast.svg";
 import SearchBar from "../SearchBar/SearchBar";
+import SearchIcon from "@mui/icons-material/Search";
 import HeartIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonIcon from "@mui/icons-material/PersonOutlineOutlined";
 import CartIcon from "@mui/icons-material/LocalMallOutlined";
@@ -21,6 +22,25 @@ const Header = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleProfileClick = () => {
     if (session) {
       router.push("/dashboard"); //Navigate to dashboard if logged in
@@ -31,9 +51,7 @@ const Header = () => {
 
   return (
     <>
-      {isVisible && (
-        <div className={styles.overlay} onClick={toggleMenu}></div>
-      )}
+      {isVisible && <div className={styles.overlay} onClick={toggleMenu}></div>}
 
       <div className={styles.headerContent}>
         <div className={styles.iconContent}>
@@ -44,9 +62,34 @@ const Header = () => {
           </Link>
         </div>
         <ButtonContent />
+
         <div className={styles.searchBarContent}>
-          <SearchBar />
+          {!isMobile ? (
+            <SearchBar
+              isDropdownVisible={isDropdownVisible}
+              toggleDropdown={toggleDropdown}
+            />
+          ) : (
+            <div
+              className={styles.searchIcon}
+              onClick={() => {
+                setIsDropdownVisible(true);
+              }}
+            >
+              <SearchIcon />
+            </div>
+          )}
         </div>
+
+        {isMobile && isDropdownVisible && (
+          <div className={styles.mobileSearchOverlay}>
+            <SearchBar
+              isDropdownVisible={isDropdownVisible}
+              toggleDropdown={toggleDropdown}
+            />
+          </div>
+        )}
+        
         <div className={styles.iconsContent}>
           <div className={styles.wishlistButton}>
             <Link href={"/wishlist"}>

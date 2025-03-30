@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import styles from "./NewsLetterBar.module.scss";
 
 const NewsLetterBar = () => {
   // const [searchQuery, setSearchQuery] = useState<string>("");
@@ -12,6 +13,7 @@ const NewsLetterBar = () => {
 
   return (
     <Paper
+    className={styles.newsLetterBar}
       component="form"
       sx={{
         p: "2px 4px",

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import styles from "@/app/apparel/[id]/page.module.scss";
+import styles from "@/app/accessories/[id]/page.module.scss";
 import RelatedProducts from "@/components/RelatedProducts/RelatedProducts";
 import { useCart } from "@/components/CartContext/CartContext";
 import { useWishlist } from "@/components/WishlistContext/WishlistContext";
@@ -129,7 +129,7 @@ const AccessoryPage = () => {
   return product ? (
     <div>
       <div className={styles.productSection}>
-        <div className={styles.ImageSection}>
+        <div className={styles.imageSection}>
           {product.image.map((imgUrl, index) => (
             <img
               key={index}

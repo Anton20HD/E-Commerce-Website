@@ -1,0 +1,339 @@
+@import "../../../styles/variables.scss";
+
+
+.productSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr; //Takes 50% of width
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.productName {
+
+  font-family: $primaryfont;
+  font-size: 25px;
+  font-weight: 300;
+
+}
+
+.productPrice {
+
+    font-family: $secondfont;
+    font-size: 25px;
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+.descriptionTitle {
+    font-family: $primaryfont;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.description {
+    font-family: $secondfont;
+    font-size: 16px;
+    color: gray;
+}
+
+.productImage {
+    height: 600px;
+}
+
+.mainSection {
+
+    margin-bottom: auto;
+    line-height: 1.25;
+}
+
+.size {
+
+    font-family: $secondfont;
+    font-size: 20px;
+}
+
+.selectedSize {
+
+    font-weight: normal;
+    color: #c0bfbf;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.sizeButton {
+    background-color: white;
+    cursor: pointer;
+    height: 40px;
+    width: 50px;
+    color: black;
+    border-radius: 15px;
+    border: solid 1px #ccc;
+    font-family: $primaryfont;
+    font-size: larger;
+}
+
+.addToCartButton {
+    background-color: black;
+    cursor: pointer;
+    height: 50px;
+    width:50%;
+    color: white;
+    border-radius: 15px;
+    border: solid 1px #ccc;
+    font-family: $primaryfont;
+    font-size: larger;
+}
+
+.selectedSizeButton {
+
+    background-color: black;
+    color: white;
+    font-family: $primaryfont ;
+}
+
+
+
+.buttonsContainer {
+
+    display: flex;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.descriptionSection {
+    margin-left: 8px;
+}
+
+.relatedProductsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.wishListButton {
+
+    width:40px;
+    height: 40px;
+    padding: .6rem;
+    margin: .2rem;
+    border: 0;
+    //margin-left: auto;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #d2caca;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.heartIcon {
+
+
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.wishListButton.activeHeart {
+    background-color: transparent;
+}
+
+.heartIcon.blackHeart {
+   /// background-color: black;
+}
+
+
+
+
+.buttonSection {
+
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+   
+    .productSection {
+        display: grid;
+        grid-template-columns: 1fr; //Takes 50% of width
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 50px;
+    }
+    
+    .productName {
+    
+      font-family: $primaryfont;
+      font-size: 25px;
+      font-weight: 300;
+    
+    }
+    
+    .productPrice {
+    
+        font-family: $secondfont;
+        font-size: 25px;
+        font-weight: 400;
+        margin-left: 8px;
+    }
+    
+    .descriptionTitle {
+        font-family: $primaryfont;
+        font-size: 25px;
+        font-weight: 300;
+    }
+    
+    .description {
+        font-family: $secondfont;
+        font-size: 15px;
+        color: gray;
+    }
+    
+    .productImage {
+        height: 300px;
+    }
+    
+    .mainSection {
+    
+        margin-bottom: auto;
+        line-height: 1.25;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .imageSection {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .size {
+    
+        font-family: $secondfont;
+        font-size: 20px;
+    }
+    
+    .selectedSize {
+    
+        font-weight: normal;
+        color: #c0bfbf;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    
+    .sizeButton {
+        background-color: white;
+        cursor: pointer;
+        height: 40px;
+        width: 50px;
+        color: black;
+        border-radius: 15px;
+        border: solid 1px #ccc;
+        font-family: $primaryfont;
+        font-size: larger;
+    }
+    
+    .addToCartButton {
+        background-color: black;
+        cursor: pointer;
+        height: 50px;
+        width:290px;
+        color: white;
+        border-radius: 15px;
+        border: solid 1px #ccc;
+        font-family: $primaryfont;
+        font-size: larger;
+    }
+    
+    .selectedSizeButton {
+    
+        background-color: black;
+        color: white;
+        font-family: $primaryfont ;
+    }
+    
+    
+    
+    .buttonsContainer {
+    
+        display: flex;
+        gap: 20px;
+        margin-bottom: 50px;
+    }
+    
+    .descriptionSection {
+        margin-right: auto;
+        margin-left: 50px;
+    }
+    
+    .relatedProductsWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .wishListButton {
+    
+        width:40px;
+        height: 40px;
+        padding: .6rem;
+        margin: .2rem;
+        border: 0;
+        //margin-left: auto;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: white;
+        border: 1px solid #d2caca;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+    
+    .heartIcon {
+    
+    
+        height: 20px;
+        width: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+    
+    }
+    
+    .wishListButton.activeHeart {
+        background-color: transparent;
+    }
+    
+    .heartIcon.blackHeart {
+       /// background-color: black;
+    }
+    
+    
+    
+    
+    .buttonSection {
+    
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+  
+    
+    
+  }
