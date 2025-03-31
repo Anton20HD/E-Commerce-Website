@@ -63,28 +63,25 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   await connectDB();
   try {
-
-    console.log("Incoming request URL:", req.url);
-
     const url = new URL(req.url);
     const category = url.searchParams.get("category");
 
-    console.log("Category:", category);
-
     const query = category ? { category } : {};
-    console.log("MongoDB Query:", query);
 
     const products = await productModel.find(query);
 
-    if(!products) {
-      return NextResponse.json({message: "No products found"}, { status: 404});
+    if (!products) {
+      return NextResponse.json(
+        { message: "No products found" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
-    console.error("API Error:", error); 
+    console.error("API Error:", error);
     return NextResponse.json(
-      { message: "Error fetching products"},
+      { message: "Error fetching products" },
       { status: 500 }
     );
   }
