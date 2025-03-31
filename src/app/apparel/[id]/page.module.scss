@@ -3,6 +3,7 @@
 
 .productSection {
     display: grid;
+    flex-grow: 1; 
     grid-template-columns: 1fr 1fr; //Takes 50% of width
     gap: 5px;
     justify-content: center;

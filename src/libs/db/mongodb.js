@@ -10,11 +10,16 @@ if (!MONGODB_URI) {
 }
 
 const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) {
+    console.log("Already connected to Mongodb");
+    return;
+  }
+
   try {
     await mongoose.connect(MONGODB_URI);
-   // console.log("Successfully connected to DB!");
+    console.log("Successfully connected to DB!");
   } catch (error) {
-    console.log(error);
+    console.error("Mongodb connection error:", error);
     process.exit(1);
   }
 };
